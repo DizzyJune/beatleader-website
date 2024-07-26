@@ -1000,7 +1000,7 @@
 	{#if separatePage && type !== 'accsaber'}
 		<aside transition:fade|global>
 			{#if qualification && !isRanked}
-				<ContentBox>
+				<ContentBox cls="leaderboard-aside-box">
 					{#if !commentaryShown}
 						<div class="score-options-section" transition:fade>
 							<span class="beat-savior-reveal clickable" on:click={() => boolflip('commentaryShown')} title="Show criteria check">
@@ -1028,7 +1028,7 @@
 				</ContentBox>
 			{/if}
 			{#if (isNominated && qualification) || (leaderboard?.reweight && !leaderboard?.reweight.finished)}
-				<ContentBox
+				<ContentBox cls="leaderboard-aside-box"
 					>{#if !qualificationInfoShown}
 						<div class="score-options-section" transition:fade>
 							<span
@@ -1066,7 +1066,7 @@
 				</ContentBox>
 			{/if}
 			{#if featuredPlaylists && featuredPlaylists.length}
-				<ContentBox>
+				<ContentBox cls="leaderboard-aside-box">
 					{#if !leaderboardShowPlaylists}
 						<div class="score-options-section" transition:fade>
 							<span class="beat-savior-reveal clickable" on:click={() => boolflip('leaderboardShowPlaylists')} title="Show map details">
@@ -1083,7 +1083,7 @@
 								</span>
 							</div>
 
-							<div class="featured-playlists">
+							<div class="featured-playlists darkened-background">
 								<span class="featured-playlist-headline">Featured in:</span>
 								{#each featuredPlaylists as featuredPlaylist}
 									<div class="stats-with-icons">
@@ -1096,7 +1096,7 @@
 				</ContentBox>
 			{/if}
 			{#if showStats}
-				<ContentBox>
+				<ContentBox cls="leaderboard-aside-box">
 					{#if !leaderboardStatsShown}
 						<div class="score-options-section" transition:fade>
 							<span class="beat-savior-reveal clickable" on:click={() => boolflip('leaderboardStatsShown')} title="Show map details">
@@ -1113,7 +1113,7 @@
 								</span>
 							</div>
 							{#if leaderboard?.stats}
-								<div class="stats-with-icons">
+								<div class="stats-with-icons darkened-background">
 									{#if !$configStore?.leaderboardPreferences?.showStatsInHeader}
 										<LeaderboardStats {leaderboard} />
 									{/if}
@@ -1133,7 +1133,7 @@
 			{/if}
 			{#if isNominated && qualification}
 				{#if qualification.criteriaCheck}
-					<ContentBox>
+					<ContentBox cls="leaderboard-aside-box">
 						{#if !criteriaInfoShown}
 							<div class="score-options-section" transition:fade>
 								<span class="beat-savior-reveal clickable" on:click={() => boolflip('criteriaInfoShown')} title="Show criteria check">
@@ -1158,7 +1158,7 @@
 			{/if}
 
 			{#if showCurve && leaderboard?.stats?.stars}
-				<ContentBox>
+				<ContentBox cls="leaderboard-aside-box">
 					{#if !curveShown}
 						<div class="score-options-section" transition:fade>
 							<span class="beat-savior-reveal clickable" on:click={() => boolflip('curveShown')} title="Show pp curve">
@@ -1173,7 +1173,7 @@
 									<i class="fas fa-chevron-left" />
 								</span>
 							</div>
-							<div>
+							<div class="darkened-background">
 								<h2 class="title is-5">
 									PP curve (<Value
 										value={modifiedPass}
@@ -1270,6 +1270,11 @@
 		pointer-events: none;
 	}
 
+	.darkened-background {
+		padding: 0.7em;
+		border-radius: 8px;
+	}
+
 	:global(.diff-tab-button) {
 		margin-bottom: -0.5em !important;
 		height: 3.5em;
@@ -1295,6 +1300,11 @@
 		font-size: 1.4em;
 	}
 
+	:global(.leaderboard-aside-box) {
+		position: static !important;
+		border-radius: 12px !important;
+	}
+
 	.featured-playlists {
 		display: flex;
 		flex-direction: column;
@@ -1311,6 +1321,7 @@
 		justify-content: space-evenly;
 		flex-direction: column;
 		padding: 1em;
+		border-radius: 8px;
 	}
 
 	.scores-grid {
@@ -1396,7 +1407,7 @@
 	}
 
 	.to-the-left {
-		margin-left: -0.5em !important;
+		margin-left: -0.4em !important;
 	}
 
 	.box-with-left-arrow {
@@ -1424,7 +1435,7 @@
 	}
 
 	.pager-container {
-		margin: 0 0.3em;
+		margin: 0 0.8em;
 	}
 
 	@media screen and (max-width: 1275px) {
@@ -1494,7 +1505,6 @@
 	.score-options-section {
 		display: grid;
 		justify-items: center;
-		margin: 0.3em;
 	}
 
 	.box-with-left-arrow {
